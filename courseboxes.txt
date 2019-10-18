@@ -1,0 +1,6 @@
+[
+"CSC",
+"MATH",
+"SENG",
+"STAT"
+]

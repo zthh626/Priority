@@ -1,4 +1,5 @@
 from Events import *
+from Calendar import Calendar
 
 def priority(list):
 	for x in list:
@@ -40,7 +41,9 @@ def main():
 	# for x in list:
 	# 	x.print()
 
-	# calendar()
+	calendar = Calendar()
+	calendar.init_credentials()
+	calendar.init_create_calendar()
 
 if __name__ == '__main__':
 	main()
