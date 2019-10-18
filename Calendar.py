@@ -67,11 +67,14 @@ class Calendar():
 			self.calendar = self.service.calendars().get(calendarId = calendar_id).execute()
 
 
-		print(self.calendar['summary'])
-		print(self.calendar['id'])
-		print(self.calendar['description'])
+		# print(self.calendar['summary'])
+		# print(self.calendar['id'])
+		# print(self.calendar['description'])
 
 		#service.calendars().delete(calendarId = calendar['id']).execute()
+
+	def get_events(self):
+ 		return self.service.events().list(calendarId = self.calendar['id'], timeMin = datetime.datetime.utcnow().isoformat() + 'Z').execute()
 		
 	def add_event(self, course, title, name_of_event, difficulty, date_due):
 		event = {
@@ -94,7 +97,7 @@ if __name__ == '__main__':
 	calendar.init_credentials()
 	calendar.init_create_calendar()
 
-	calendar.add_event(course = "course", title = "title", name_of_event = "noe", difficulty = "3", date_due = '2019-10-20')
+	#calendar.add_event(course = "course", title = "title", name_of_event = "noe", difficulty = "3", date_due = '2019-10-20')
 
 
 
