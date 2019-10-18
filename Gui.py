@@ -7,7 +7,7 @@ class Gui():
 	def __init__(self):
 
 		self.window = QWidget()
-		self.window.setWindowTitle('Priority')
+		self.window.setWindowTitle('Priority by Alex Huang')
 
 		self.layout1 = QVBoxLayout()
 		self.layout2 = QHBoxLayout()
@@ -95,6 +95,7 @@ class Gui():
 		self.cb.addItem(text_value)
 		with open('courseboxes.json', 'w') as output:
 			json.dump(self.cb_data, output)
+		self.tb.setText("")
 
 	def on_click_cal(self):
 		text_value = self.tb.text()
@@ -102,9 +103,8 @@ class Gui():
 		
 
 	def printDateInfo(self, qDate):
-		print('{0}/{1}/{2}'.format(qDate.month(), qDate.day(), qDate.year()))
-		print(f'Day Number of the year: {qDate.dayOfYear()}')
-		print(f'Day Number of the week: {qDate.dayOfWeek()}')
+		self.date = '{0}-{1}-{2}'.format(qDate.year(), qDate.month(), qDate.day())
+		print(self.date)
 
 
 

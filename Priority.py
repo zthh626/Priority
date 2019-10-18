@@ -1,5 +1,9 @@
 from Events import *
 from Calendar import Calendar
+from Gui import Gui
+import sys
+from PyQt5.QtWidgets import QApplication
+from Events_List import Events_List
 
 def priority(list):
 	for x in list:
@@ -28,22 +32,15 @@ def daysAwayValue(days):
 
 
 def main():
+	# calendar = Calendar()
+	# calendar.init_credentials()
+	# calendar.init_create_calendar()
 
-	
-	# list = []
 
-	# list.append((Midterm("mid", 3, "10/10/19")))
-	# list.append((Homework("hw", 2, "10/10/19")))
-	# list.append((Exam("exam", 5, "10/10/19")))
+	# app = QApplication([])
+	# gui = Gui()
+	# sys.exit(app.exec_())
 
-	# priorityList = priority(list)
-
-	# for x in list:
-	# 	x.print()
-
-	calendar = Calendar()
-	calendar.init_credentials()
-	calendar.init_create_calendar()
 
 if __name__ == '__main__':
 	main()
