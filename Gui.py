@@ -1,10 +1,18 @@
 import sys
 import json
 from PyQt5.QtWidgets import *
+from Calendar import Calendar
+import datetime
 
 class Gui():
 
-	def __init__(self):
+	def __init__(self, calendar, event_list):
+
+		self.calendar = calendar
+		self.event_list = event_list
+
+		default = datetime.datetime.now()
+		self.date = '{0}-{1}-{2}'.format(default.year, default.month, default.day)
 
 		self.window = QWidget()
 		self.window.setWindowTitle('Priority by Alex Huang')
@@ -80,14 +88,34 @@ class Gui():
 	def load_button_cal(self):
 		self.bcal = QPushButton('Add to Calendar')
 		self.layout5.addWidget(self.bcal)
-
 		self.bcal.clicked.connect(self.on_click_cal)
 
 	def load_priority_box(self):
-		self.pb = QLabel('No Events Loaded')
+		self.pb = QTextEdit('No Events Loaded')
+
+		self.pb.setFixedWidth(300)
+		self.pb.setFixedHeight(475)
 
 		self.pb.setFrameStyle(QFrame.Panel | QFrame.Sunken)
 		self.layout7.addWidget(self.pb)
+
+		#self.update_events(self.event_list.priority_events)
+
+	def update_events(self, events):
+
+		print("UPDATING")
+
+		self.pb.setText('')
+
+		s = ""
+		for event in events:
+			print(event)
+			s += '{0}\n {1}-{2}-{3} \n Days Away: {4} \n\n'.format(event.name, event.date_due.year, event.date_due.month, event.date_due.day, event.days_away)
+			
+		if s == "":
+			s = 'No Events Loaded'
+
+		self.pb.setText(s)
 
 	def on_click_course(self):
 		text_value = self.tb.text()
@@ -99,13 +127,14 @@ class Gui():
 
 	def on_click_cal(self):
 		text_value = self.tb.text()
-		print(text_value)
+		self.calendar.add_event(str(self.cb.currentText()), text_value, str(self.eb.currentText()), int(self.diff.currentText()), self.date)
+		self.event_list.refresh()
+		self.update_events(self.event_list.priority_events)
+		self.tb.setText("")
 		
-
 	def printDateInfo(self, qDate):
 		self.date = '{0}-{1}-{2}'.format(qDate.year(), qDate.month(), qDate.day())
 		print(self.date)
-
 
 
 if __name__ == '__main__':

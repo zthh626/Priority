@@ -1,21 +1,21 @@
-from Events import *
+from Priority_Events import *
 from Calendar import Calendar
-from Gui import Gui
+from Gui import *
 import sys
 from PyQt5.QtWidgets import QApplication
 from Priority_Event_List import Priority_Event_List
 
 def priority(list):
 	for x in list:
-		x.value = determineValue(x)
+		x.value = determine_value(x)
 
 	list.sort(reverse = True, key=lambda x: x.value)
 
 
-def determine_value(priority_event):
-	value = event.difficulty * .35
-	value += event.rank * .15
-	value += daysAwayValue(event.daysAway) * .50
+def determine_value(event):
+	value = int(event.difficulty) * .35
+	value += int(event.rank) * .15
+	value += int(event.days_away) * .50
 
 	return value
 
@@ -24,14 +24,13 @@ def main():
 	calendar.init_credentials()
 	calendar.init_create_calendar()
 
-	event_list = Event_List(calendar)
+	event_list = Priority_Event_List(calendar)
 
-	for x in event_list.e_list:
-		print (x['summary'])
+	priority(event_list.priority_events)
 
-	# app = QApplication([])
-	# gui = Gui()
-	# sys.exit(app.exec_())
+	app = QApplication([])
+	gui = Gui(calendar, event_list)
+	sys.exit(app.exec_())
 
 
 
