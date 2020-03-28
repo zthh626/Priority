@@ -1,4 +1,6 @@
 #ignore
-*.json
+*credentials.json
+*PriorityAccountKey.json
 *.pickle
 */
+*courseboxes.json

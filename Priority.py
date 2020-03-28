@@ -15,7 +15,22 @@ def priority(list):
 def determine_value(event):
 	value = int(event.difficulty) * .35
 	value += int(event.rank) * .15
-	value += int(event.days_away) * .50
+	days_val = 1
+	days = event.days_away
+	if days == 1:
+		days_val = 6
+	elif days <= 2:
+		days_val = 5
+	elif days <= 4:
+		days_val = 4
+	elif days <= 5:
+		days_val = 3
+	elif days <= 7:
+		days_val = 2
+	else:
+		day_val = 1
+
+	value += days_val * .50
 
 	return value
 

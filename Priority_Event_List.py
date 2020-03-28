@@ -22,7 +22,7 @@ class Priority_Event_List():
 				converted_list.append(Assignment(event['summary'], event['description'], event['start']['date']))
 			elif(summary[1] == "Midterm"):
 				converted_list.append(Midterm(event['summary'], event['description'], event['start']['date']))
-			elif(summary[1] == "Exa,"):
+			elif(summary[1] == "Exam"):
 				converted_list.append(Exam(event['summary'], event['description'], event['start']['date']))
 
 		return converted_list

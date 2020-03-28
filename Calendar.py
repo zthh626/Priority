@@ -41,7 +41,7 @@ class Calendar():
 	#creates calendar named Priority, if it does not existt
 	def init_create_calendar(self):
 
-		#checks to see if Priority calendar exists
+		#checks to see if Priority calendar exists, if it does, it keeps calendar_id
 		calendar_list = self.service.calendarList().list().execute()
 
 		check = False
@@ -66,17 +66,11 @@ class Calendar():
 		else:
 			self.calendar = self.service.calendars().get(calendarId = calendar_id).execute()
 
-
-		# print(self.calendar['summary'])
-		# print(self.calendar['id'])
-		# print(self.calendar['description'])
-
-		#service.calendars().delete(calendarId = calendar['id']).execute()
-
-
+	#gets events starting from tomorrow
 	def get_events(self):
  		return self.service.events().list(calendarId = self.calendar['id'], timeMin = datetime.datetime.utcnow().isoformat() + 'Z').execute()
 		
+	#adds event intto calendar
 	def add_event(self, course, title, name_of_event, difficulty, date_due):
 		event = {
 			'summary' : '{0} - {1} - {2}'.format(course, name_of_event, title),
